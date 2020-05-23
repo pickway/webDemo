@@ -1,113 +1,119 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
-  </div>
+<div class="hello" :class="{ active: isActive,'nactive': nActive}" :style= "{background-image: 'url('+imgs+')'} ">
+<!-- :class="{ active: isActive,'nactive': nActive}" :style= "{background: 'url('+imgs+')'}" -->
+  <el-container>
+    <el-header>
+      <ul class="ulBasic">
+        <li>图片</li>
+        <li>视频</li>
+        <li>题库</li> 
+        <li>sql练习</li>
+      </ul>
+    </el-header>
+    <el-main>
+      <span @click="tabImg" class="processImg"></span>
+      <span @click="tabImg" class="backImg"></span>
+    </el-main>
+    <el-footer>
+    </el-footer>
+  </el-container>
+</div>
+
 </template>
 
 <script>
 export default {
   name: 'HelloWorld',
-  data () {
+  data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      index: 0,
+      isActive: true,
+      nActive: false,
+      imgs: '',
+      imgs2: ['../assets/bacimg/backgroud.jpg','../assets/bacimg/backgroud1.jpg','../assets/bacimg/backgroud2.jpg']
+    };
+  },
+  create() {
+  },  
+  mounted() {
+    this.imgs = this.imgs2[0];
+    console.log(this.imgs)
+  },
+  methods: {
+    tabImg() {
+      this.index = this.index + 1;
+      this.imgs = this.imgs2[index];
+      isActive = !isActive;
+      nActive = !nActive;
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+<style>
+  .hello {
+    background-image: url(../assets/bacimg/backgroud.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+  }
+  ul li {
+    font-size: 18px;
+    color: #ffffffd1;
+    display: inline-block;
+    float: left;
+  }
+  .el-container{
+    height: 100%;
+  }
+  .el-header, .el-footer {
+    background-color: #e9eef300;
+    line-height: 60px;
+  }
+  .el-main {
+    background-color: #e9eef300;
+    color: #333;
+    line-height: 160px;
+    padding: 0;
+  }
+  .ulBasic {
+    list-style: none;
+  }
+  .ulBasic li {
+    margin-left: 10px;
+    cursor:pointer;
+  }
+  .ulBasic li:hover {
+    color: blue;
+  }
+  .processImg,.backImg {
+    width: 40px;
+    height: 40px;
+    background: url("../assets/img/forward.png") no-repeat;
+    background-size: cover;
+    position: absolute;
+    right: 7%;
+    bottom: 7%;
+    font-size: 35px;
+    cursor:pointer;
+  }
+  .backImg {
+    background: url("../assets/img/back.png") no-repeat;
+    right: 11%; 
+    background-size: cover;
+    cursor:pointer;
+  }
+  .active {
+    opacity: 1;
+    color: red;
+    transition: all 0.5s;
+  }
+  .nActive {
+    opacity: 0;
+    color: red;
+    transition: all 0.5s;
+  }
 </style>
+

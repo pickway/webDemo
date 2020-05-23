@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="all">
     <div class="outer_label">
       <img class="inner_label login_logo" src="../../assets/logo.png" alt="#">
     </div>
@@ -14,8 +14,8 @@
       <el-button class="login_btn" @click.native="login" type="primary" round :loading="isBtnLoading">登录</el-button>
       <el-button class="login_btn" @click.native="regist" type="primary" round :loading="isBtnLoading">注册</el-button>
       <div style="margin-top: 10px">
-        <span style="color: #000099;margin-left: 50%;" @click="login">游客登录</span>
-        <span style="color: #A9A9AB;margin-left: 13%;">忘记密码？</span>
+        <span style="color: #000099;margin-left: 50%;cursor:pointer;" @click="login">游客登录</span>
+        <span style="color: #A9A9AB;margin-left: 13%;cursor:pointer;">忘记密码？</span>
       </div>
     </div>
   </div>
@@ -52,7 +52,7 @@ export default {
       if (!this.password) {
         this.$message.error('请输入密码')
       }
-      this.$api.post('/login', {
+/*      this.$api.post('/login', {
         nickName: this.userName,
         password: this.password
       })
@@ -62,7 +62,8 @@ export default {
             console.log('1111')
             this.$router.replace({path: '/index'})
           }
-        })
+        })*/
+        this.$router.replace({path: '/index'})
     }
   }
 }
@@ -74,7 +75,9 @@ export default {
     padding-left: 10%;
     padding-right: 10%;
   }
-
+  .outer_label {
+    background: linear-gradient(to right, #409eff , #66b1ff);
+  }
   .qxs-ic_user {
     background: url("../../assets/login/user.png") no-repeat;
     background-size: 15px 16px;
@@ -89,7 +92,7 @@ export default {
   }
 
   .login_logo {
-    height: 100%;
+    height: 50%;
   }
 
   .login_btn {
